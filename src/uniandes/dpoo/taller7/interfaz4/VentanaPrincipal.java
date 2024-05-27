@@ -42,17 +42,16 @@ public class VentanaPrincipal extends JFrame {
 			salvarTop10();
 		}
 		});
-		
-		PanelNorte panelNorte = new PanelNorte();
+		this.panelNorte = new PanelNorte();
 		this.add(panelNorte, BorderLayout.NORTH);
 		
-		this.panelEste = new PanelEast();
+		this.panelEste = new PanelEast(this);
 		this.add(panelEste, BorderLayout.EAST);
 		
 		this.panelSur = new PanelSouth();
 		this.add(panelSur, BorderLayout.SOUTH);
 		
-		this.cuadricula = new PanelCenter(this.getWidth(), this.getHeight(), 5);
+		this.cuadricula = new PanelCenter(this.getWidth(), this.getHeight(), this.tablero);
 		this.add(cuadricula, BorderLayout.CENTER);
 		
 		setVisible(true);
@@ -73,5 +72,20 @@ public class VentanaPrincipal extends JFrame {
 			new DialogoDeError(this, TipoExcepciones.EncodingFileException);
 			e.printStackTrace();
 		}
+	}
+	
+	
+	
+	public void crearNuevoJuego() {
+		int[] valores = panelNorte.getValores();
+		this.tablero = new Tablero(valores[0]);
+		this.tablero.desordenar(valores[1]);
+		this.cuadricula.setTablero(this.tablero);
+		actualizar();
+	}
+	
+	public void actualizar() {
+		this.setVisible(false);
+		this.setVisible(true);
 	}
 }

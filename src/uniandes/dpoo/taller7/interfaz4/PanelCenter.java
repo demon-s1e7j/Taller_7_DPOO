@@ -13,13 +13,28 @@ public class PanelCenter extends JPanel {
 	private int stepAlto;
 	private int stepAncho;
 	private Tablero tablero;
+	private int alto;
+	private int ancho;
 	
-	public PanelCenter(int ancho, int alto, int tamano) {
-		this.tamano = tamano;
+	public PanelCenter(int ancho, int alto, Tablero tablero) {
+		this.tamano = tablero.darTablero().length;
 		this.stepAlto = (int) (alto - 40) / tamano;
 		this.stepAncho = (int) (ancho - 150) / tamano;
-		this.tablero = new Tablero(tamano);
+		this.alto = alto;
+		this.ancho = ancho;
+		this.tablero = tablero;
 		setBackground(new Color( 156, 123, 84));
+	}
+	
+	public void setTablero(Tablero tablero) {
+		this.tablero = tablero;
+		this.tamano = tablero.darTablero().length;
+		this.stepAlto = (int) (alto - 40) / tamano;
+		this.stepAncho = (int) (ancho - 150) / tamano;
+	}
+	
+	public void actualizar() {
+		repaint();
 	}
 	
 	public Color getColor(boolean valor) {
