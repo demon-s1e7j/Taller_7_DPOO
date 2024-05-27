@@ -3,26 +3,31 @@ package uniandes.dpoo.taller7.interfaz4;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
 import uniandes.dpoo.taller7.modelo.Tablero;
 
-public class PanelCenter extends JPanel {
+public class PanelCenter extends JPanel implements MouseListener {
 	private int tamano;
 	private int stepAlto;
 	private int stepAncho;
 	private Tablero tablero;
 	private int alto;
 	private int ancho;
+	private VentanaPrincipal juego;
 	
-	public PanelCenter(int ancho, int alto, Tablero tablero) {
+	public PanelCenter(int ancho, int alto, Tablero tablero, VentanaPrincipal juego) {
+		super.addMouseListener(this);
 		this.tamano = tablero.darTablero().length;
 		this.stepAlto = (int) (alto - 40) / tamano;
 		this.stepAncho = (int) (ancho - 150) / tamano;
 		this.alto = alto;
 		this.ancho = ancho;
 		this.tablero = tablero;
+		this.juego = juego;
 		setBackground(new Color( 156, 123, 84));
 	}
 	
@@ -66,4 +71,45 @@ public class PanelCenter extends JPanel {
     	g2d.setColor(Color.BLACK);
     	g2d.drawRect(x, y, stepAncho, stepAlto);
     }
+    
+    @Override
+    public void mousePressed(MouseEvent e)
+    {
+    int click_x = e.getX();
+    int click_y = e.getY();
+    int[] casilla = convertirCoordenadasACasilla(click_x, click_y);
+    tablero.jugar(casilla[1]++, casilla[0]++);
+    juego.actualizarJugadas();
+    repaint();
+    }
+    private int[] convertirCoordenadasACasilla(int x, int y)
+    {
+    int fila = (int) (y / stepAlto);
+    int columna = (int) (x / stepAncho);
+    return new int[] { fila, columna };
+    }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

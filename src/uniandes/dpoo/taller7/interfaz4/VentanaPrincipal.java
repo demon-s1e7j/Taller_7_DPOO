@@ -51,7 +51,7 @@ public class VentanaPrincipal extends JFrame {
 		this.panelSur = new PanelSouth();
 		this.add(panelSur, BorderLayout.SOUTH);
 		
-		this.cuadricula = new PanelCenter(this.getWidth(), this.getHeight(), this.tablero);
+		this.cuadricula = new PanelCenter(this.getWidth(), this.getHeight(), this.tablero, this);
 		this.add(cuadricula, BorderLayout.CENTER);
 		
 		setVisible(true);
@@ -81,11 +81,22 @@ public class VentanaPrincipal extends JFrame {
 		this.tablero = new Tablero(valores[0]);
 		this.tablero.desordenar(valores[1]);
 		this.cuadricula.setTablero(this.tablero);
+		this.actualizarJugadas();
 		actualizar();
 	}
 	
 	public void actualizar() {
 		this.setVisible(false);
 		this.setVisible(true);
+	}
+
+	public void reiniciarJuego() {
+		this.tablero.reiniciar();
+		this.actualizarJugadas();
+		actualizar();
+	}
+
+	public void actualizarJugadas() {
+		this.panelSur.agregarJugada(Integer.toString(this.tablero.darJugadas()));
 	}
 }
