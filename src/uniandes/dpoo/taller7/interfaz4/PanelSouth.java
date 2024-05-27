@@ -28,4 +28,7 @@ public class PanelSouth extends JPanel {
 	public void agregarJugada(String jugadas) {
 		this.tfJugadas.setText(jugadas);
 	}
+	public void setUsuario(String usuario) {
+		this.tfJugador.setText(usuario);
+	}
 }

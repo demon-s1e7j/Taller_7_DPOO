@@ -30,6 +30,16 @@ public class PanelEast extends JPanel implements ActionListener {
 				juego.reiniciarJuego();
 			}
 		});
+		top10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new DialogTop10(juego);
+			}
+		});
+		cambiarJugador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				juego.setUsuario("S1e7J");
+			}
+		});
 		JSeparator s0 = new JSeparator();
 		JSeparator s1 = new JSeparator();
 		JSeparator s2 = new JSeparator();

@@ -24,9 +24,11 @@ public class VentanaPrincipal extends JFrame {
 	private PanelSouth panelSur;
 	private PanelEast panelEste;
 	private PanelCenter cuadricula;
+	private String usuario;
 	
 
 	public VentanaPrincipal() {
+		this.usuario = "";
 		this.tablero = new Tablero(5);
 		this.top10 = new Top10();
 		File archivo = new File("data/top10.csv");
@@ -62,6 +64,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	public void salvarTop10() {
+		this.top10.agregarRegistro(this.usuario, this.tablero.calcularPuntaje());
 		File registroTop10 = new File("data/top10.csv");
 		try {
 			this.top10.salvarRecords(registroTop10);
@@ -98,5 +101,14 @@ public class VentanaPrincipal extends JFrame {
 
 	public void actualizarJugadas() {
 		this.panelSur.agregarJugada(Integer.toString(this.tablero.darJugadas()));
+	}
+	
+	public Collection<RegistroTop10> getTop10() {
+		return this.top10.darRegistros();
+	}
+	
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+		this.panelSur.setUsuario(usuario);
 	}
 }
